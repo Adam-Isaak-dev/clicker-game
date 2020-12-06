@@ -4,17 +4,7 @@ class Game {
     this.multiplier = 1;
     this.money = new Money();
 
-  //   this.pickUpgrade = {
-  //     cost: 10,
-  //     upgrade: 1,
-  //   }
-
-  //   this.mineUpgrade = {
-  //     cost: 10,
-  //     upgrade: 3,
-  //   }
   }
-
   // update() {
 
   // }
@@ -30,13 +20,47 @@ class Money {
   update(value) {
     this.money += value;
     this.page.innerText = `${this.money.toFixed(0)}`;
+    this.checkUpgrades();
+  }
+
+  checkUpgrades() {
+    if (this.money < upgrades.clicks[upgrades.clickLevel].cost) {
+      upgrades.clickButton.disabled = true;
+    } else {
+      upgrades.clickButton.disabled = false;
+    }
+
+    if (this.money < upgrades.mines[upgrades.mineLevel].cost) {
+      upgrades.mineButton.disabled = true;
+    } else {
+      upgrades.mineButton.disabled = false;
+    }
   }
 }
 
 const game = new Game();
+game.money.update(0);
+
 
 const clicker = document.getElementById("clicker");
+const clickButton  = document.getElementById('pick');
+const mineButton  = document.getElementById('mine');
+// clickButton.disabled = true;
+// mineButton.disabled = true;
+
 
 clicker.addEventListener("click", function(){
   game.money.update(game.click * game.multiplier);
+});
+
+clickButton.addEventListener("click", function() {
+  game.money.update(-upgrades.clicks[upgrades.clickLevel].cost);
+  game.click = upgrades.clicks[upgrades.clickLevel].output;
+  upgrades.updateClick(); 
+});
+
+mineButton.addEventListener("click", function() {
+  game.money.update(-upgrades.mines[upgrades.mineLevel].cost);
+  game.multiplier = upgrades.mines[upgrades.mineLevel].output;
+  upgrades.updateMine(); 
 });
