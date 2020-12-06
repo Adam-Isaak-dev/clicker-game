@@ -5,15 +5,15 @@ class Upgrades {
     this.clicks = [{
       output: 2,
       cost: 1,
-      name: `Sharpened Pick`
+      name: `Pickaxes`
     }, {
       output: 5,
       cost: 2,
-      name: `Tempered Pick`
+      name: `Dynamite`
     }, {
       output: 10,
       cost: 5,
-      name: `Masterwork Pick`
+      name: `Drills`
     }];  
     
     this.mineLevel = -1;
@@ -21,15 +21,15 @@ class Upgrades {
     this.mines = [{
       output: 2,
       cost: 4,
-      name: `Iron Mine`
+      name: `Underground Mine`
     }, {
       output: 3,
       cost: 8,
-      name: `Copper Mine`
+      name: `Mine Rails`
     }, {
       output: 5,
       cost: 24,
-      name: `Silver Mine`
+      name: `Elevators`
     }];
   }
 
