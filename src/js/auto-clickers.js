@@ -1,8 +1,8 @@
 class Clickers {
   constructor() {
    this.miner = new Clicker(1000, 1, 10, 1.5)
-   this.drill = new Clicker(10000, 100, 1000, 1.5)
-   this.excavator = new Clicker(1000, 100, 10000, 1.5)
+   this.drill = new Clicker(1000, 100, 1000, 1.5)
+   this.excavator = new Clicker(100, 100, 10000, 1.5)
   }
 }
 
@@ -20,7 +20,6 @@ class Clicker {
     this.level++;
     this.interval = interval;
     this.value = value;
-    this.cost = (this.cost * this.increase).toFixed(0);
   }
 
   click() {
@@ -28,13 +27,17 @@ class Clicker {
   }
   
   purchase() {
-    
+    game.money.update(-this.cost);
+    this.number++;
+    this.cost = (this.cost * this.increase).toFixed(0);
   }
 }
 
 const clickers = new Clickers();
 
-window.setInterval(clickers.miner.click(), clickers.miner.interval);
-window.setInterval(clickers.drill.click(), clickers.drill.interval);
-window.setInterval(clickers.excavator.click(), clickers.excavator.interval);
+const minerClick = setInterval(function() {
+  clickers.miner.click();
+}, clickers.miner.interval);
 
+const drillClick = setInterval(function(){clickers.drill.click()}, clickers.drill.interval);
+const excavatorClick = setInterval(function(){clickers.excavator.click()}, clickers.excavator.interval);
