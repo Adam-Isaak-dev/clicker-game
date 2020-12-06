@@ -2,53 +2,55 @@ class Upgrades {
   constructor () {
     this.clickLevel = -1;
     this.clickButton  = document.getElementById('pick');
-    this.clicks = [{
-      output: 2,
-      cost: 1,
-      name: `Pickaxes`
-    }, {
-      output: 5,
-      cost: 2,
-      name: `Dynamite`
-    }, {
-      output: 10,
-      cost: 5,
-      name: `Drills`
-    }];  
-    
-    this.mineLevel = -1;
-    this.mineButton  = document.getElementById('mine');
-    this.mines = [{
-      output: 2,
-      cost: 4,
-      name: `Underground Mine`
-    }, {
-      output: 3,
-      cost: 8,
-      name: `Mine Rails`
-    }, {
-      output: 5,
-      cost: 24,
-      name: `Elevators`
-    }];
+    this.list = [
+      new Upgrade(0, "placeholder1", "*INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE*", 100, 2),
+      new Upgrade(1, "placeholder2", "*INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE*", 1000, 5),
+      new Upgrade(2, "placeholder3", "*INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE*", 100000, 250),
+      new Upgrade(3, "placeholder4", "*INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE*", 100, 1.5)
+    ];
   }
-
-  updateClick() {
-    this.clickLevel++;
-    if(this.clickLevel < this.clicks.length) {
-      this.clickButton.innerText = `${this.clicks[this.clickLevel].name}: $${this.clicks[this.clickLevel].cost}`;
-    } else {
-      this.clickButton.style.display = 'none';
+  
+  updateUpgrade(money) {
+    for(const upgrade of this.list) {
+      if(!upgrade.purchased) {
+        if(upgrade.cost > money) {
+          this.holder.querySelector('button').disabled = true;
+        } else {
+          this.holder.querySelector('button').disabled = false;
+        }
+      }
     }
   }
+}
 
-  updateMine() {
-    this.mineLevel++;
-    if(this.mineLevel < this.mines.length) {
-      this.mineButton.innerText = `${this.mines[this.mineLevel].name}: $${this.mines[this.mineLevel].cost}`;
-    } else {
-      this.mineButton.style.display = 'none';
-    }
+class Upgrade {
+  constructor(id, name, description, cost, value) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.cost = cost;
+    this.value = value;
+    this.holder =  document.querySelector(".upgrades");
+    this.purchased = false;
+  }
+
+  purchase() {
+    this.remove()
+    game.money.update(-this.cost);
+    return this.value;
+  }
+
+  insert() {
+    this.holder.insertAdjacentHTML("beforeend", 
+    `<li id="${this.id}>
+      ${this.name}: $${this.cost}
+      ${this.description}
+      <button>BUY</button> 
+    </li>`);
+  }
+
+  remove() {
+    this.holder.querySelector(`#${this.id}`).remove();
   }
 }
 

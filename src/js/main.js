@@ -1,6 +1,7 @@
 class Game {
   constructor() {
     this.click = 1;
+    this.auto = 1;
     this.multiplier = 1;
     this.money = new Money();
 
@@ -20,21 +21,11 @@ class Money {
   update(value) {
     this.money += value;
     this.page.innerText = `${this.money.toFixed(0)}`;
-    this.checkUpgrades();
+    this.checkPurchases();
   }
 
-  checkUpgrades() {
-    if (this.money < upgrades.clicks[upgrades.clickLevel].cost) {
-      upgrades.clickButton.disabled = true;
-    } else {
-      upgrades.clickButton.disabled = false;
-    }
-
-    if (this.money < upgrades.mines[upgrades.mineLevel].cost) {
-      upgrades.mineButton.disabled = true;
-    } else {
-      upgrades.mineButton.disabled = false;
-    }
+  checkPurchases() {
+   
   }
 }
 
