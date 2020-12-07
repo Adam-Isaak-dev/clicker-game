@@ -1,7 +1,5 @@
 class Upgrades {
   constructor () {
-    this.clickLevel = -1;
-    this.clickButton  = document.getElementById('pick');
     this.list = [
       new Upgrade(0, "placeholder1", "*INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE*", 100, 2),
       new Upgrade(1, "placeholder2", "*INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE*", 1000, 5),
@@ -10,13 +8,14 @@ class Upgrades {
     ];
   }
   
-  updateUpgrade(money) {
+  checkUpgrades(money) {
+    const container = document.getElementById('upgrades');
     for(const upgrade of this.list) {
       if(!upgrade.purchased) {
         if(upgrade.cost > money) {
-          this.holder.querySelector('button').disabled = true;
+          container.querySelector('button').disabled = true;
         } else {
-          this.holder.querySelector('button').disabled = false;
+          container.querySelector('button').disabled = false;
         }
       }
     }
@@ -30,7 +29,7 @@ class Upgrade {
     this.description = description;
     this.cost = cost;
     this.value = value;
-    this.holder =  document.querySelector(".upgrades");
+    this.holder =  document.getElementById("upgrades");
     this.purchased = false;
   }
 
@@ -42,7 +41,7 @@ class Upgrade {
 
   insert() {
     this.holder.insertAdjacentHTML("beforeend", 
-    `<li id="${this.id}>
+    `<li id="upgrade-${this.id}>
       ${this.name}: $${this.cost}
       ${this.description}
       <button>BUY</button> 
@@ -55,6 +54,6 @@ class Upgrade {
 }
 
 const upgrades = new Upgrades();
-
-upgrades.updateClick();
-upgrades.updateMine();
+upgrades.list.forEach(function(item) {
+  item.insert()
+});

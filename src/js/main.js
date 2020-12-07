@@ -4,12 +4,7 @@ class Game {
     this.auto = 1;
     this.multiplier = 1;
     this.money = new Money();
-
   }
-  // update() {
-
-  // }
-
 }
 
 class Money {
@@ -25,33 +20,15 @@ class Money {
   }
 
   checkPurchases() {
-   
+  //  upgrades.checkUpgrades(this.money.money)
   }
 }
 
 const game = new Game();
 game.money.update(0);
 
+const mine = document.getElementById("mine");
 
-const clicker = document.getElementById("clicker");
-const clickButton  = document.getElementById('pick');
-const mineButton  = document.getElementById('mine');
-// clickButton.disabled = true;
-// mineButton.disabled = true;
-
-
-clicker.addEventListener("click", function(){
+mine.addEventListener("click", function(){
   game.money.update(game.click * game.multiplier);
-});
-
-clickButton.addEventListener("click", function() {
-  game.money.update(-upgrades.clicks[upgrades.clickLevel].cost);
-  game.click = upgrades.clicks[upgrades.clickLevel].output;
-  upgrades.updateClick(); 
-});
-
-mineButton.addEventListener("click", function() {
-  game.money.update(-upgrades.mines[upgrades.mineLevel].cost);
-  game.multiplier = upgrades.mines[upgrades.mineLevel].output;
-  upgrades.updateMine(); 
 });
