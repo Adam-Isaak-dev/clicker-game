@@ -9,17 +9,16 @@ class Upgrades {
   }
   
   checkUpgrades(money) {
-    const container = document.getElementById('upgrades');
-    for(const upgrade of this.list) {
-      if(!upgrade.purchased) {
-        if(upgrade.cost > money) {
-          container.querySelector('button').disabled = true;
+    this.list.forEach(function(item) {
+      if(!item.purchased) {
+        if(item.cost > money) {
+          item.holder.querySelector(`#upgrade-${item.id}`).querySelector('button').disabled = true;
         } else {
-          container.querySelector('button').disabled = false;
+          item.holder.querySelector(`#upgrade-${item.id}`).querySelector('button').disabled = false;
         }
       }
-    }
-  }
+    });
+  } 
 }
 
 class Upgrade {
@@ -36,24 +35,27 @@ class Upgrade {
   purchase() {
     this.remove()
     game.money.update(-this.cost);
-    return this.value;
+    this.value;
   }
 
   insert() {
-    this.holder.insertAdjacentHTML("beforeend", 
-    `<li id="upgrade-${this.id}>
+    this.holder.insertAdjacentHTML("beforebegin", 
+    `<li id="upgrade-${this.id}">
       ${this.name}: $${this.cost}
-      ${this.description}
+      <div>${this.description}</div>
       <button>BUY</button> 
     </li>`);
   }
 
   remove() {
-    this.holder.querySelector(`#${this.id}`).remove();
+    document.querySelector(`#upgrade-${this.id}`).remove();
   }
 }
 
 const upgrades = new Upgrades();
-upgrades.list.forEach(function(item) {
+upgrades.list.forEach(function(item, index) {
   item.insert()
+  document.querySelector(`#upgrade-${index}`).querySelector('button').addEventListener('click', function(){
+    item.purchase();
+  });
 });

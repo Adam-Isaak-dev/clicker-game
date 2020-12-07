@@ -20,7 +20,7 @@ class Money {
   }
 
   checkPurchases() {
-  //  upgrades.checkUpgrades(this.money.money)
+   upgrades.checkUpgrades(this.money.money)
   }
 }
 

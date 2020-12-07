@@ -8,7 +8,16 @@ class AutoClickers {
   }
 
   checkAutos() {
-    
+    const container = document.getElementById('auto-clickers');
+    for(const item of this.list) {
+      if(!item.purchased) {
+        if(item.cost > money) {
+          container.querySelector('button').disabled = true;
+        } else {
+          container.querySelector('button').disabled = false;
+        }
+      }
+    }
   }
 }
 
@@ -28,14 +37,14 @@ class Clicker {
   }
   
   purchase() {
+    console.log('purchased auto')
     game.money.update(-this.cost);
     this.number++;
-    this.cost *= 2;
   }
 
   insert() {
     this.holder.insertAdjacentHTML("beforeend", 
-    `<li id="auto-${this.id}>
+    `<li id="auto-${this.id}">
       ${this.name}
       $${this.cost}
       <div class="number">${this.number}</div> 
@@ -45,8 +54,11 @@ class Clicker {
 }
 
 const autoClickers = new AutoClickers();
-autoClickers.types.forEach(function(item) {
+autoClickers.types.forEach(function(item, index) {
   item.insert()
+  item.holder.querySelector(`#auto-${index}`).querySelector('button').addEventListener('click', function(){
+    item.purchase();
+  });
 });
 
 const auto = setInterval(function() {
