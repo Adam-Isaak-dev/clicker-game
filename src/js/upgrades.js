@@ -1,10 +1,10 @@
 class Upgrades {
   constructor () {
     this.list = [
-      new Upgrade(0, "placeholder1", "*INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE*", 100, 2),
-      new Upgrade(1, "placeholder2", "*INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE*", 1000, 5),
-      new Upgrade(2, "placeholder3", "*INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE*", 100000, 250),
-      new Upgrade(3, "placeholder4", "*INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE* *INSERT DESCRIPTION TEXT HERE*", 100, 1.5)
+      new Upgrade(0, "placeholder1", "*INSERT DESCRIPTION TEXT HERE*", 100, 2),
+      new Upgrade(1, "placeholder2", "*INSERT DESCRIPTION TEXT HERE*", 1000, 5),
+      new Upgrade(2, "placeholder3", "*INSERT DESCRIPTION TEXT HERE*", 100000, 250),
+      new Upgrade(3, "placeholder4", "*INSERT DESCRIPTION TEXT HERE*", 100, 1.5)
     ];
   }
   
@@ -34,15 +34,18 @@ class Upgrade {
 
   purchase() {
     this.remove()
+    this.purchased = true;
     game.money.update(-this.cost);
     this.value;
   }
 
   insert() {
-    this.holder.insertAdjacentHTML("beforebegin", 
+    this.holder.insertAdjacentHTML("beforeend", 
     `<li id="upgrade-${this.id}">
-      ${this.name}: $${this.cost}
+      ${this.name}
       <div>${this.description}</div>
+      $${this.cost}
+      <br>
       <button>BUY</button> 
     </li>`);
   }

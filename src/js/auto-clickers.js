@@ -1,34 +1,32 @@
 class AutoClickers {
   constructor() {
     this.types = [
-      new Clicker(0, 'auto-clicker1', 1, 25),
-      new Clicker(1, 'auto-clicker2', 10, 300),
-      new Clicker(2, 'auto-clicker3', 100, 2000)
+      new Clicker(0, 'Miner', 1, 10, "images\\028-miner.png"),
+      new Clicker(1, 'auto-clicker2', 10, 100, "#"),
+      new Clicker(2, 'auto-clicker3', 100, 500, "#")
     ];
   }
 
-  checkAutos() {
-    const container = document.getElementById('auto-clickers');
-    for(const item of this.list) {
-      if(!item.purchased) {
-        if(item.cost > money) {
-          container.querySelector('button').disabled = true;
-        } else {
-          container.querySelector('button').disabled = false;
-        }
+  checkAutos(money) {
+    this.types.forEach(function(item) {
+      if(item.cost > money) {
+        item.holder.querySelector(`#auto-${item.id}`).querySelector('button').disabled = true;
+      } else {
+        item.holder.querySelector(`#auto-${item.id}`).querySelector('button').disabled = false;
       }
-    }
+    });
   }
 }
 
 class Clicker {
-  constructor(id, name, value, cost) {
+  constructor(id, name, value, cost, img) {
     this.id = id;
     this.level = 0;
     this.number = 0;
     this.name = name;
     this.value = value;
-    this.cost =  cost;
+    this.cost = cost;
+    this.img = img;
     this.holder = document.getElementById('auto-clickers')
   }
 
@@ -36,17 +34,18 @@ class Clicker {
     game.money.update(this.number * this.value * game.multiplier)
   }
   
-  purchase() {
-    console.log('purchased auto')
+  purchase(e) {
     game.money.update(-this.cost);
     this.number++;
+    e.target.parentNode.querySelector(".number").innerText = `${this.number}`
   }
 
   insert() {
     this.holder.insertAdjacentHTML("beforeend", 
     `<li id="auto-${this.id}">
       ${this.name}
-      $${this.cost}
+      <div>$${this.cost}</div>
+      <img src="${this.img}" height="75px" width="75px">
       <div class="number">${this.number}</div> 
       <button>BUY</button> 
     </li>`);
@@ -56,8 +55,8 @@ class Clicker {
 const autoClickers = new AutoClickers();
 autoClickers.types.forEach(function(item, index) {
   item.insert()
-  item.holder.querySelector(`#auto-${index}`).querySelector('button').addEventListener('click', function(){
-    item.purchase();
+  item.holder.querySelector(`#auto-${index}`).querySelector('button').addEventListener('click', function(e){
+    item.purchase(e);
   });
 });
 
