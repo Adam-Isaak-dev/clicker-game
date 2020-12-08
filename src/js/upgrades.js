@@ -53,6 +53,8 @@ class Upgrade {
   remove() {
     document.querySelector(`#upgrade-${this.id}`).remove();
   }
+
+  clickUpgrade
 }
 
 const upgrades = new Upgrades();

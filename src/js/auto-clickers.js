@@ -21,7 +21,6 @@ class AutoClickers {
 class Clicker {
   constructor(id, name, value, cost, img) {
     this.id = id;
-    this.level = 0;
     this.number = 0;
     this.name = name;
     this.value = value;
