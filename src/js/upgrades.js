@@ -1,10 +1,10 @@
 class Upgrades {
   constructor () {
     this.list = [
-      new Upgrade(0, "placeholder1", "*INSERT DESCRIPTION TEXT HERE*", 100, 2),
-      new Upgrade(1, "placeholder2", "*INSERT DESCRIPTION TEXT HERE*", 1000, 5),
-      new Upgrade(2, "placeholder3", "*INSERT DESCRIPTION TEXT HERE*", 100000, 250),
-      new Upgrade(3, "placeholder4", "*INSERT DESCRIPTION TEXT HERE*", 100, 1.5)
+      new Upgrade(0, 'click', "placeholder1", "*INSERT DESCRIPTION TEXT HERE*", 50, 1, "#"),
+      new Upgrade(1, 'production', "placeholder2", "*INSERT DESCRIPTION TEXT HERE*", 250, 1, "#"),
+      new Upgrade(2, "production", 'placeholder3', "*INSERT DESCRIPTION TEXT HERE*", 500, 0.5,"#"),
+      new Upgrade(3, "multiplier", 'placeholder4', "*INSERT DESCRIPTION TEXT HERE*", 100, 0.5, '#')
     ];
   }
   
@@ -19,15 +19,22 @@ class Upgrades {
       }
     });
   } 
+
+  upgrade(type, id) {
+    game[type] += this.list[id].value;
+    console.log(type)
+  }
 }
 
 class Upgrade {
-  constructor(id, name, description, cost, value) {
+  constructor(id, type, name, description, cost, value, img) {
     this.id = id;
+    this.type = type;
     this.name = name;
     this.description = description;
     this.cost = cost;
     this.value = value;
+    this.img = img;
     this.holder =  document.getElementById("upgrades");
     this.purchased = false;
   }
@@ -46,6 +53,7 @@ class Upgrade {
       <div>${this.description}</div>
       $${this.cost}
       <br>
+      <img src="${this.img}" height="75px" width="75px">
       <button>BUY</button> 
     </li>`);
   }
@@ -53,8 +61,6 @@ class Upgrade {
   remove() {
     document.querySelector(`#upgrade-${this.id}`).remove();
   }
-
-  clickUpgrade
 }
 
 const upgrades = new Upgrades();
@@ -62,5 +68,6 @@ upgrades.list.forEach(function(item, index) {
   item.insert()
   document.querySelector(`#upgrade-${index}`).querySelector('button').addEventListener('click', function(){
     item.purchase();
+    upgrades.upgrade(item.type, item.id);
   });
 });

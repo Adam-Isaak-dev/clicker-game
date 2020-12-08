@@ -1,9 +1,9 @@
 class AutoClickers {
   constructor() {
     this.types = [
-      new Clicker(0, 'Miner', 1, 10, "images\\028-miner.png"),
-      new Clicker(1, 'auto-clicker2', 10, 100, "#"),
-      new Clicker(2, 'auto-clicker3', 100, 500, "#")
+      new Clicker(0, 'production', 'Miner', 1, 10, "images\\028-miner.png"),
+      new Clicker(1, 'production', 'Excavator', 10, 100, "images\\014-excavator.png"),
+      new Clicker(2, 'production', 'Refinery', 100, 500, "images\\035-refinery.png")
     ];
   }
 
@@ -19,8 +19,9 @@ class AutoClickers {
 }
 
 class Clicker {
-  constructor(id, name, value, cost, img) {
+  constructor(id, type, name, value, cost, img) {
     this.id = id;
+    this.type = type;
     this.number = 0;
     this.name = name;
     this.value = value;
@@ -30,7 +31,7 @@ class Clicker {
   }
 
   click() {
-    game.money.update(this.number * this.value * game.multiplier)
+    game.money.update(this.number * this.value * game[this.type]* game.multiplier)
   }
   
   purchase(e) {
