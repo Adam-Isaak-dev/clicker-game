@@ -29,7 +29,7 @@ function cssTask() {
 }
 
 function jsTask() {
-  return src('src/js/*.js')
+  return src(['src/js/upgrades.js', 'src/js/auto-clickers.js', 'src/js/*.js'])
     .pipe(sourcemaps.init())
     .pipe(terser())
     .pipe(concat('all.js'))
