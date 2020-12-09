@@ -1,32 +1,28 @@
 * {
   font-family: 'Signika';
+  text-align: center;
 }
 
-body {
+body, main, ul, main li {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  text-align: center;
+}
+
+body {
   background-color: lightgoldenrodyellow;
 }
 
-header {
+header, footer, main {
   width: 100%;
 }
 
-footer {
-  width: 100%;
-  text-align: right;
-  padding: 1%;
+header {
+  flex-basis: 177px;
 }
 
 main {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
   flex-direction: column;
 }
 
@@ -34,31 +30,67 @@ h1 {
   font-family: 'Black Ops One';
 }
 
+ ul, li {
+  border: solid 1px black;
+}
+
+li {
+  background-color: goldenrod;
+}
+
 ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
   padding: 0;
-  margin: 5% 0;
+  margin: 10px 0;
+  width: auto;
+}
+
+button {
+  border: ridge 1px black;
+  background-color: silver;
 }
 
 #mine {
   background-color: gold;
   padding: 20px;
   border-radius: 100%;
-  background-repeat: no-repeat;
   border: none;
   cursor: pointer;
 }
 
-li {
-  border-style: solid;
-  background-color: goldenrod;
-  border-collapse: collapse;
+
+header li {
   list-style: none;
   padding: 0;
   margin: 0;
-  width: 100px;
+  width: 175px;
 }
 
+main ul {
+  max-width: 240px;
+}
+
+main li {
+  flex-direction: column;
+  justify-content: space-between;
+  list-style: none;
+  padding: 9px;
+  margin: 0;
+  width: 100px;
+  height: 200px;
+}
+
+@media only screen and (min-width: 360px) {
+  main ul {
+    max-width: 360px;
+  }
+}
+@media only screen and (min-width: 480px) {
+  main ul {
+    max-width: 480px;
+  }
+}
+@media only screen and (min-width: 720px) {
+  main ul {
+    max-width: 720px;
+  }
+}
