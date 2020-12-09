@@ -1,10 +1,18 @@
 class Upgrades {
   constructor () {
     this.list = [
-      new Upgrade(0, 'click', "placeholder1", "*INSERT DESCRIPTION TEXT HERE*", 50, 1, "#"),
-      new Upgrade(1, 'production', "placeholder2", "*INSERT DESCRIPTION TEXT HERE*", 250, 1, "#"),
-      new Upgrade(2, "production", 'placeholder3', "*INSERT DESCRIPTION TEXT HERE*", 500, 0.5,"#"),
-      new Upgrade(3, "multiplier", 'placeholder4', "*INSERT DESCRIPTION TEXT HERE*", 100, 0.5, '#')
+      new Upgrade(0, 'click', "Golden Touch", "Click <br> +100%", 50, 1, "images\\020-Gold Ingots.png"),
+      new Upgrade(1, 'production', "TNT", "Production +15%", 250, 0.15, "images\\041-tnt.png"),
+      new Upgrade(2, 'click', "Gemstone Touch", "Click <br> +300%", 300, 3, "images\\025-precious stones.png"),
+      new Upgrade(3, "distribution", 'Extra Stock', "Distribution +20%", 500, 0.1,"images\\040-stock.png"),
+      new Upgrade(4, "commerce", 'Investors', "Commerce +10%", 1000, 0.10, 'images\\030-money bag.png'),
+      new Upgrade(5, "click", "Supreme Golden Touch", "Click +500%", 1000, 5, "images\\018-gold ingots.png"),
+      new Upgrade(6, "commerce", "Trading", "Commerce +10%", 2000, 0.1, "images\\043-trade.png"),
+      new Upgrade(7, "production", 'Deeper Mines', "Production +10%", 5000, 0.1, 'images\\045-tunnel.png'),
+      new Upgrade(8, "multiplier", "More Locations", "Bonus <br> +5%", 10000, 0.05, "images\\019-gold mine.png"),
+      new Upgrade(9, "commerce", 'Market Growth', "Commerce +20%", 10000, 0.15, 'images\\024-invest.png'),
+      new Upgrade(10, "distribution", 'Enhanced Rails', "Distribution +20%", 37500, 0.20, 'images\\034-railway.png'),
+      new Upgrade(11, "multiplier", 'Analytics', "Bonus <br> +5%", 10000, 0.1, 'images\\001-analytics.png')
     ];
   }
   
@@ -22,7 +30,7 @@ class Upgrades {
 
   upgrade(type, id) {
     game[type] += this.list[id].value;
-    console.log(type)
+    document.getElementById(type).innerText = `${((game[type] - 1)*100).toFixed(0)}`;
   }
 }
 
@@ -40,7 +48,11 @@ class Upgrade {
   }
 
   purchase() {
-    this.remove()
+    const boughtTag = document.createElement('div');
+    boughtTag.innerHTML = "<strong><em>BOUGHT</em></strong>";
+    const button = document.querySelector(`#upgrade-${this.id}`).querySelector("button");
+    button.parentNode.replaceChild(boughtTag, button);
+
     this.purchased = true;
     game.money.update(-this.cost);
     this.value;

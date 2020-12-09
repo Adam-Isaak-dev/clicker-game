@@ -1,9 +1,18 @@
 class AutoClickers {
   constructor() {
     this.types = [
-      new Clicker(0, 'production', 'Miner', 1, 10, "images\\028-miner.png"),
-      new Clicker(1, 'production', 'Excavator', 10, 100, "images\\014-excavator.png"),
-      new Clicker(2, 'production', 'Refinery', 100, 500, "images\\035-refinery.png")
+      new Clicker(0, 'production', 'Miners', 1, 10, "images\\028-miner.png"),
+      new Clicker(1, 'distribution', 'Mine Carts', 3, 35, "images\\047-wagon.png"),
+      new Clicker(2, 'commerce', 'Sellers', 5, 75, "images\\007-buyer.png"),
+      new Clicker(3, 'distribution', 'Trucks', 10, 250, "images\\008-cargo truck.png"),
+      new Clicker(4, 'production', 'Excavators', 15, 500, "images\\014-excavator.png"), 
+      new Clicker(5, 'commerce', "Shop's", 25, 750, "images\\038-shop.png"),
+      new Clicker(6, 'production', "Refinery's", 50, 2000, "images\\035-refinery.png"),
+      new Clicker(7,'commerce', 'Jewelers', 100, 5000, "images\\036-diamond ring.png"),
+      new Clicker(8, 'distribution', 'Trains', 150, 7500, "images\\044-train.png"),
+      new Clicker(9, 'distribution', 'Conveyers', 200, 10000, "images\\011-conveyor.png"),
+      new Clicker(10, 'commerce', 'Banks', 300, 15000, "images\\003-bank.png"),
+      new Clicker(11, 'production', "Factory's", 1000, 1000000, "images\\016-factory.png"),
     ];
   }
 
@@ -44,6 +53,8 @@ class Clicker {
     this.holder.insertAdjacentHTML("beforeend", 
     `<li id="auto-${this.id}">
       ${this.name}
+      <div>${this.type}</div>
+      <div>$${this.value}/s</div>
       <div>$${this.cost}</div>
       <img src="${this.img}" height="75px" width="75px">
       <div class="number">${this.number}</div> 

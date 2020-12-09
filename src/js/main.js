@@ -2,8 +2,8 @@ class Game {
   constructor() {
     this.click = 1;
     this.production = 1;
-    this.technology = 1;
     this.commerce = 1;
+    this.distribution = 1;
     this.multiplier = 1;
     this.money = new Money();
   }
